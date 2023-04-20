@@ -1,2 +1,2 @@
-# ItsReleaseDay
+# iitsFriiday
 Mein Capstone/Abschlussprojekt
