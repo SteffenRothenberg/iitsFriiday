@@ -1,6 +1,6 @@
 package Service;
 
-import Data.Album;
+import Model.Album;
 import Repository.AlbumRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
