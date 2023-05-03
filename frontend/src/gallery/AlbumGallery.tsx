@@ -1,7 +1,7 @@
-import {Album} from "./Album";
+import {Album} from "../model/Album";
 import {useState} from "react";
-import useAlbums from "./useAlbums";
-import AlbumCard from "./AlbumCard";
+import useAlbums from "../customHooks/useAlbums";
+import AlbumCard from "../card/AlbumCard";
 import './AlbumGallery.css'
 
 type AlbumGalleryProps = {

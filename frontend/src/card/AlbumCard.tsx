@@ -1,4 +1,4 @@
-import {Album} from "./Album";
+import {Album} from "../model/Album";
 import {useNavigate} from "react-router-dom";
 import './AlbumCard.css'
 

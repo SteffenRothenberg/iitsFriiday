@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import {Album} from "./Album";
+import {Album} from "../model/Album";
 
 export default function useAlbums(){
     const [albums, setAlbums] = useState<Album[]>([])
