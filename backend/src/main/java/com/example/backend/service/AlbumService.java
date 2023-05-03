@@ -14,4 +14,8 @@ public class AlbumService {
     public List<Album> getAll() {
         return albumRepoInterface.findAll();
     }
+
+    public Album addAlbum(Album myAlbum) {
+        return albumRepoInterface.save(myAlbum);
+    }
 }

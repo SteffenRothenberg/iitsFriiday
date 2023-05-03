@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import {Album} from "../model/Album";
+import {Album, NewAlbum} from "../model/Album";
 
 export default function useAlbums(){
     const [albums, setAlbums] = useState<Album[]>([])
@@ -18,5 +18,10 @@ export default function useAlbums(){
                 console.error(error)
             })
     }
-    return {albums}
+    function addAlbum(newAlbum: NewAlbum){
+        axios.post("/api/albums", newAlbum)
+            .then(() => loadAllAlbums())
+                .catch(() => console.error("post on /api/albums not successful"))
+    }
+    return {albums, addAlbum}
 }
