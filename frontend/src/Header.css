@@ -1,0 +1,9 @@
+.header{
+    color: orange;
+    font-size: large;
+}
+.navbar{
+    border: solid 1px orange;
+    background-color: rgba(255, 245, 238, 0.5);
+
+}

@@ -2,6 +2,7 @@ import {Album} from "./Album";
 import {useState} from "react";
 import useAlbums from "./useAlbums";
 import AlbumCard from "./AlbumCard";
+import './AlbumGallery.css'
 
 type AlbumGalleryProps = {
     albums: Album[],
@@ -14,8 +15,6 @@ export default function AlbumGallery(props: AlbumGalleryProps){
     );
     return (
         <div className="album-gallery">
-            <br/>
-            <br/>
             <div className="actionbar">
                 <input
                     type="text"

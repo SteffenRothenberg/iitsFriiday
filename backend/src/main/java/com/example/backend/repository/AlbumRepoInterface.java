@@ -1,6 +1,6 @@
-package Repository;
+package com.example.backend.repository;
 
-import Model.Album;
+import com.example.backend.model.Album;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

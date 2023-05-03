@@ -1,7 +1,7 @@
-package Service;
+package com.example.backend.service;
 
-import Model.Album;
-import Repository.AlbumRepoInterface;
+import com.example.backend.model.Album;
+import com.example.backend.repository.AlbumRepoInterface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,7 @@
-package Controller;
+package com.example.backend.controller;
 
-import Model.Album;
-
-import Service.AlbumService;
+import com.example.backend.service.AlbumService;
+import com.example.backend.model.Album;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
