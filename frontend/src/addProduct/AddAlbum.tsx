@@ -27,7 +27,7 @@ export default function AddAlbum(props: AddAlbumProps){
     return (
         <div>
             <form onSubmit={onSaveAlbum}>
-                <p>Arist:</p>
+                <p>Artist:</p>
                 <input type="text"
                        value={artist}
                        onChange={(event) => {
