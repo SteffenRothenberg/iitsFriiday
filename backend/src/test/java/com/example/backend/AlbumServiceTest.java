@@ -11,9 +11,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
@@ -21,12 +24,12 @@ import static org.mockito.Mockito.*;
 class AlbumServiceTest {
     private AlbumService albumService;
     @Mock
-    private AlbumRepoInterface albumRepoInterfaceMock;
+    private AlbumRepoInterface albumRepoInterface;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        albumService = new AlbumService(albumRepoInterfaceMock);
+        albumService = new AlbumService(albumRepoInterface);
     }
     @Test
     void testGetAll() {
@@ -36,7 +39,7 @@ class AlbumServiceTest {
 
         List<Album> expectedAlbums = Arrays.asList(album1, album2, album3);
 
-        when(albumRepoInterfaceMock.findAll()).thenReturn(expectedAlbums);
+        when(albumRepoInterface.findAll()).thenReturn(expectedAlbums);
 
         List<Album> actualAlbums = albumService.getAll();
 
@@ -45,6 +48,24 @@ class AlbumServiceTest {
         for (int i = 0; i < expectedAlbums.size(); i++) {
             Assertions.assertEquals(expectedAlbums.get(i), actualAlbums.get(i));
         }
-        verify(albumRepoInterfaceMock, times(1)).findAll();
+        verify(albumRepoInterface, times(1)).findAll();
     }
+    @Test
+    void getAll_expectedEmptyList_WhenDataBaseIsEmpty() {
+        //GIVEN
+        final AlbumRepoInterface recipeRepoInterface = mock(AlbumRepoInterface.class);
+        final AlbumService albumService = new AlbumService(albumRepoInterface);
+
+        when(recipeRepoInterface.findAll())
+                .thenReturn(Collections.emptyList());
+
+        //WHEN
+        List<Album> actual = albumService.getAll();
+        List<Album> expected = new ArrayList<>();
+
+        //THEN
+        verify(albumRepoInterface).findAll();
+        assertEquals(actual, expected);
+    }
+
 }
