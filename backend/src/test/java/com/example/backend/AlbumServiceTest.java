@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,10 +54,10 @@ class AlbumServiceTest {
     @Test
     void getAll_expectedEmptyList_WhenDataBaseIsEmpty() {
         //GIVEN
-        final AlbumRepoInterface recipeRepoInterface = mock(AlbumRepoInterface.class);
+        final AlbumRepoInterface albumRepoInterface = mock(AlbumRepoInterface.class);
         final AlbumService albumService = new AlbumService(albumRepoInterface);
 
-        when(recipeRepoInterface.findAll())
+        when(albumRepoInterface.findAll())
                 .thenReturn(Collections.emptyList());
 
         //WHEN
@@ -67,5 +68,22 @@ class AlbumServiceTest {
         verify(albumRepoInterface).findAll();
         assertEquals(actual, expected);
     }
+    @DirtiesContext
+    @Test
+    void addAlbum_ShouldRespondAddedAlbum_WhenAlbumAdded() {
+        //GIVEN
+        final AlbumRepoInterface albumRepoInterface = mock(AlbumRepoInterface.class);
+        final AlbumService albumService = new AlbumService(albumRepoInterface);
 
+        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        when(albumRepoInterface.save(album1))
+                .thenReturn(album1);
+
+        //WHEN
+        Album actual = albumService.addAlbum(album1);
+
+        //THEN
+        verify(albumRepoInterface).save(album1);
+        assertEquals(actual, album1);
+    }
 }
