@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -78,4 +80,33 @@ public class AlbumIntegrationTest {
                                 """
                 ));
     }
+    @Test
+    @DirtiesContext
+    void addAlbum_shouldReturnAddedAlbum() throws Exception {
+        mockMvc.perform(post("/api/albums")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "barcode": "111",
+                                "artist": "BonezMc, GZUZ",
+                                "title": "High & Hungrig 3",
+                                "format": "CD",
+                                "releaseDate": "28.04.2023"
+                                }
+                                """
+                        ))
+                .andExpect(status().isOk())
+                .andExpect(content().json(
+                        """
+                                {
+                                "barcode": "111",
+                                "artist": "BonezMc, GZUZ",
+                                "title": "High & Hungrig 3",
+                                "format": "CD",
+                                "releaseDate": "28.04.2023"
+                                }
+                                """
+                ));
+    }
+
 }
