@@ -18,4 +18,16 @@ public class AlbumService {
     public Album addAlbum(Album myAlbum) {
         return albumRepoInterface.save(myAlbum);
     }
+
+    public Album getAlbumById(String id) {
+        return albumRepoInterface.findById(id).orElseThrow();
+    }
+
+    public Album editAlbum(Album albumToEdit) {
+        return albumRepoInterface.save(albumToEdit);
+    }
+
+    public void deleteAlbum(String id) {
+        albumRepoInterface.deleteById(id);
+    }
 }
