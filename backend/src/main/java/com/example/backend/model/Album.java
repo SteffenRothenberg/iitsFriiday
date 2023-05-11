@@ -11,6 +11,5 @@ public record Album (
         String title,
         String format,
         String releaseDate
-
 ){
 }
