@@ -34,6 +34,7 @@ class AlbumServiceTest {
     }
     @Test
     void testGetAll() {
+        //GIVEN
         Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
         Album album2 = new Album("2", "Tom Jones", "Not unusual", "CD", "01.01.2001");
         Album album3 = new Album("3", "Barry White", "can't get enough of your love", "CD", "01.01.2001");
@@ -41,7 +42,7 @@ class AlbumServiceTest {
         List<Album> expectedAlbums = Arrays.asList(album1, album2, album3);
 
         when(albumRepoInterface.findAll()).thenReturn(expectedAlbums);
-
+        //WHEN
         List<Album> actualAlbums = albumService.getAll();
 
         Assertions.assertEquals(expectedAlbums.size(), actualAlbums.size());
@@ -49,6 +50,7 @@ class AlbumServiceTest {
         for (int i = 0; i < expectedAlbums.size(); i++) {
             Assertions.assertEquals(expectedAlbums.get(i), actualAlbums.get(i));
         }
+        //THEN
         verify(albumRepoInterface, times(1)).findAll();
     }
     @Test

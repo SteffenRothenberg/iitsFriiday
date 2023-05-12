@@ -108,5 +108,25 @@ public class AlbumIntegrationTest {
                                 """
                 ));
     }
+    @Test
+    @DirtiesContext
+    void getAlbumById_ShouldReturnAlbumWithId() throws Exception {
+        Album album = new Album("123", "BonezMc, GZUZ", "High & Hungrig 3", "CD", "28.04.2023");
+        albumRepoInterface.save(album);
+
+        mockMvc.perform(get("/api/albums/123"))
+                .andExpect(status().isOk())
+                .andExpect(content().json(
+                        """
+                                    {
+                                    "barcode": "123",
+                                    "artist": "BonezMc, GZUZ",
+                                    "title": "High & Hungrig 3",
+                                    "format": "CD",
+                                    "releaseDate": "28.04.2023"
+                                }
+                                    """
+                ));
+    }
 
 }
