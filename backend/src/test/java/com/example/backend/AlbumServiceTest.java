@@ -12,12 +12,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 @AutoConfigureMockMvc
@@ -87,5 +85,37 @@ class AlbumServiceTest {
         //THEN
         verify(albumRepoInterface).save(album1);
         assertEquals(actual, album1);
+    }
+    @DirtiesContext
+    @Test
+    void getAlbumByID_ShouldReturnOneAlbum_WhenOneAlbumWasAdded() {
+        //GIVEN
+        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+
+        when(albumRepoInterface.findById("1")).thenReturn(Optional.of(album1));
+
+        //WHEN
+        Album actual = albumService.getAlbumById("1");
+
+        //THEN
+        Album expected = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        verify(albumRepoInterface).findById("1");
+        assertEquals(expected, actual);
+    }
+    @DirtiesContext
+    @Test
+    void getAlbumByID_ShouldReturnException_WhenAlbumDoesNotExist() {
+        //GIVEN
+        when(albumRepoInterface.findById("1")).thenThrow(NoSuchElementException.class);
+
+        //WHEN
+        try {
+            albumService.getAlbumById("1");
+            fail();
+        }
+        //THEN
+        catch (NoSuchElementException Ignored){
+            verify(albumRepoInterface).findById("1");
+        }
     }
 }
