@@ -155,5 +155,21 @@ public class AlbumIntegrationTest {
                                 """
                 ));
     }
+    @Test
+    @DirtiesContext
+    void editAlbum_ById_shouldReturnBadRequest() throws Exception {
+        mockMvc.perform(put("/api/albums/1234/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "barcode": "12",
+                                "title": "BadRequest-Album",
+                                "format": "id stimmt nicht mit id in url überein muss Status 400 > BadRequest kommen",
+                                "releaseDate": ""
+                                }
+                                """
+                        ))
+                .andExpect(status().isBadRequest());
+    }
 
 }
