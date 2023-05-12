@@ -11,8 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -126,6 +125,34 @@ public class AlbumIntegrationTest {
                                     "releaseDate": "28.04.2023"
                                 }
                                     """
+                ));
+    }
+    @Test
+    @DirtiesContext
+    void editAlbum_ById_shouldReturnEditedAlbum() throws Exception {
+        mockMvc.perform(put("/api/albums/123/update")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                "barcode": "123",
+                                    "artist": "BonezMc, GZUZ",
+                                    "title": "High & Hungrig 3",
+                                    "format": "CD",
+                                    "releaseDate": "28.04.2023"
+                                }
+                                """
+                        ))
+                .andExpect(status().isOk())
+                .andExpect(content().json(
+                        """
+                                {
+                                "barcode": "123",
+                                    "artist": "BonezMc, GZUZ",
+                                    "title": "High & Hungrig 3",
+                                    "format": "CD",
+                                    "releaseDate": "28.04.2023"
+                                }
+                                """
                 ));
     }
 
