@@ -171,5 +171,33 @@ public class AlbumIntegrationTest {
                         ))
                 .andExpect(status().isBadRequest());
     }
+    @DirtiesContext
+    @Test
+    void deleteAlbum_expectSuccessfulDelete() throws Exception {
+        String saveResult = mockMvc.perform(
+                        post("http://localhost:8080/api/albums")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("""
+                                        {"description":"Nächsten Endpunkt implementieren","status":"OPEN"}
+                                        """)
+
+                )
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Album saveResultAlbum = objectMapper.readValue(saveResult, Album.class);
+        String barcode = saveResultAlbum.barcode();
+
+        mockMvc.perform(delete("http://localhost:8080/api/albums/" + barcode)
+                )
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("http://localhost:8080/api/albums"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                        []
+                        """));
+    }
 
 }
