@@ -30,7 +30,9 @@ export default function useDetail(){
             })
             .catch((error) =>{
                 toast.error("Album does not exist");
-                })}
+                })
+    }
+
     function editOnClick(){
         setEditing(true);
     }
