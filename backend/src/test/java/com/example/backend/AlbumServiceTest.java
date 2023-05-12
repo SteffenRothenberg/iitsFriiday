@@ -118,4 +118,19 @@ class AlbumServiceTest {
             verify(albumRepoInterface).findById("1");
         }
     }
+    @DirtiesContext
+    @Test
+    void editAlbum_ShouldReturnEditedAlbum_WhenValidProvided(){
+        //GIVEN
+        Album updatedAlbum = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+
+        when(albumRepoInterface.save(updatedAlbum)).thenReturn(updatedAlbum);
+
+        //WHEN
+        Album actual = albumService.editAlbum(updatedAlbum);
+
+        //THEN
+        verify(albumRepoInterface).save(updatedAlbum);
+        assertEquals(updatedAlbum, actual);
+    }
 }
