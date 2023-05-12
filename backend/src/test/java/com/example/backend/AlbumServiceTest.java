@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
@@ -27,7 +26,6 @@ class AlbumServiceTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
         albumService = new AlbumService(albumRepoInterface);
     }
     @Test
@@ -132,5 +130,18 @@ class AlbumServiceTest {
         //THEN
         verify(albumRepoInterface).save(updatedAlbum);
         assertEquals(updatedAlbum, actual);
+    }
+    @DirtiesContext
+    @Test
+    void deleteAlbumById_shouldDeleteAlbumById(){
+        //GIVEN
+        Album albumToDelete = new Album ("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        albumRepoInterface.save(albumToDelete);
+
+        //WHEN
+        albumService.deleteAlbum("1");
+
+        //THEN
+        verify(albumRepoInterface).deleteById("1");
     }
 }
