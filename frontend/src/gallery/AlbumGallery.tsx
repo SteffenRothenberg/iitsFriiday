@@ -1,6 +1,6 @@
 import {Album} from "../model/Album";
 import {useState} from "react";
-import useAlbums from "../customHooks/useAlbums";
+import useAlbums from "../customHooks/UseAlbums";
 import AlbumCard from "../card/AlbumCard";
 import './AlbumGallery.css'
 

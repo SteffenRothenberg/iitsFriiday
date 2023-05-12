@@ -1,9 +1,8 @@
 .album-detail {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px seashell solid;
+    background-color: orange;
+    border: 1px black solid;
     margin: 50px;
     border-radius: 5px;
     padding: 10px;
     color: white;
 }
-

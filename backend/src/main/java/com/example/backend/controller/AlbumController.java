@@ -32,9 +32,9 @@ public class AlbumController {
         return albumService.getAlbumById(id);
     }
     @PutMapping(path = {"{id}/update", "{id}"})
-    public Album editAlbum(@PathVariable String barcode,@RequestBody Album albumToEdit) {
-        if (!albumToEdit.barcode().equals(barcode)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Recipe does not exist");
+    public Album editAlbum(@PathVariable String id,@RequestBody Album albumToEdit) {
+        if (!albumToEdit.barcode().equals(id)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Album does not exist");
         }
         return albumService.editAlbum(albumToEdit);
     }
@@ -42,5 +42,4 @@ public class AlbumController {
     public void deleteAlbum(@PathVariable String id){
         albumService.deleteAlbum(id);
     }
-
 }

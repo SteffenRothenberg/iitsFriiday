@@ -20,7 +20,7 @@ export default function AlbumCard(props: AlbumProps){
             <p>Release-Date:</p>
             {props.album.releaseDate}
             <br/>
-            <button onClick={() => {navigate("/api/albums/" + props.album.barcode)}}>Album-Details</button>
+            <button onClick={() => {navigate("/albums/" + props.album.barcode)}}>Album-Details</button>
         </div>
     )
 }

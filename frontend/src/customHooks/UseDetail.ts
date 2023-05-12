@@ -5,27 +5,25 @@ import axios from "axios";
 import {toast} from "react-toastify";
 
 export default function useDetail(){
-    const initialState = {barcode: "", artist: "", title: "", format: "", releaseDate:""}
-    const [album, setAlbum] = useState <Album>(initialState);
+    const [album, setAlbum] = useState <Album>();
     const [editing, setEditing] = useState(false);
     const [editedAlbum, setEditedAlbum] = useState<Album>({
         barcode: "",
         artist: "",
         title: "",
         format: "",
-        releaseDate:""
+        releaseDate:"",
     });
     const {barcode} = useParams<{barcode: string}>();
 
-    useEffect(() => void{
-        if (barcode: string) {
+    useEffect(() => {
+        if (barcode) {
             loadAlbumById(barcode);
         }
         //eslint-disable-next-line
     }, []);
     function loadAlbumById(barcode: string) {
-        axios
-            .get("/api/albums/" + barcode)
+        axios.get("/api/albums/" + barcode)
             .then((response)=>{
                 setAlbum(response.data);
                 setEditedAlbum(response.data);
@@ -58,5 +56,5 @@ export default function useDetail(){
                 toast.error("Failed to update Album");
             });
     }
-    return {editedAlbum, album, editing, handleFormSubmit, editOnClick, albumInputChange}
+    return {editedAlbum, album, editing, handleFormSubmit, editOnClick, albumInputChange, setEditedAlbum}
 }
