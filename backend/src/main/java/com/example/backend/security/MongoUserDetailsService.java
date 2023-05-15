@@ -15,6 +15,7 @@ public class MongoUserDetailsService implements UserDetailsService {
     private final MongoUserRepository mongoUserRepository;
 
     @Override
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         MongoUser mongoUser = mongoUserRepository.findMongoUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with name: " + username + " not found!"));
