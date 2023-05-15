@@ -3,11 +3,13 @@ export type Album = {
     artist: string,
     title: string,
     format: string,
-    releaseDate: string
+    releaseDate: string,
+    imageUrl: string
 }
 export type NewAlbum = {
     artist: string,
     title: string,
     format: string,
-    releaseDate: string
+    releaseDate: string,
+    imageUrl: string
 }

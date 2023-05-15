@@ -10,6 +10,7 @@ public record Album (
         String artist,
         String title,
         String format,
-        String releaseDate
+        String releaseDate,
+        String imageUrl
 ){
 }

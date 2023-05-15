@@ -49,6 +49,12 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                             value={editedAlbum.releaseDate}
                             onChange={albumInputChange}
                         />
+                        <input
+                            type="text"
+                            name="imageUrl"
+                            value={editedAlbum.imageUrl}
+                            onChange={albumInputChange}
+                        />
                         <button type="submit">Speichern</button>
                     </form>
                 ) : (
@@ -62,6 +68,8 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                         <p>Format :{album.format}</p>
                         <br/>
                         <p>Release-Date :{album.releaseDate}</p>
+                        <br/>
+                        <img src={album.imageUrl} alt="No Picture!" width="150" height="150"></img>
                         <br/>
                         <button onClick={editOnClick}>Release Bearbeiten</button>
                         <button onClick={onDeleteClick}>Release löschen</button>
