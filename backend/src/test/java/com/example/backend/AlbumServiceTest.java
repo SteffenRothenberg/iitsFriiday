@@ -31,9 +31,9 @@ class AlbumServiceTest {
     @Test
     void testGetAll() {
         //GIVEN
-        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
-        Album album2 = new Album("2", "Tom Jones", "Not unusual", "CD", "01.01.2001");
-        Album album3 = new Album("3", "Barry White", "can't get enough of your love", "CD", "01.01.2001");
+        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001","");
+        Album album2 = new Album("2", "Tom Jones", "Not unusual", "CD", "01.01.2001","");
+        Album album3 = new Album("3", "Barry White", "can't get enough of your love", "CD", "01.01.2001","");
 
         List<Album> expectedAlbums = Arrays.asList(album1, album2, album3);
 
@@ -73,7 +73,7 @@ class AlbumServiceTest {
         final AlbumRepoInterface albumRepoInterface = mock(AlbumRepoInterface.class);
         final AlbumService albumService = new AlbumService(albumRepoInterface);
 
-        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001","");
         when(albumRepoInterface.save(album1))
                 .thenReturn(album1);
 
@@ -88,7 +88,7 @@ class AlbumServiceTest {
     @Test
     void getAlbumByID_ShouldReturnOneAlbum_WhenOneAlbumWasAdded() {
         //GIVEN
-        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        Album album1 = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001","");
 
         when(albumRepoInterface.findById("1")).thenReturn(Optional.of(album1));
 
@@ -96,7 +96,7 @@ class AlbumServiceTest {
         Album actual = albumService.getAlbumById("1");
 
         //THEN
-        Album expected = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        Album expected = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001","");
         verify(albumRepoInterface).findById("1");
         assertEquals(expected, actual);
     }
@@ -120,7 +120,7 @@ class AlbumServiceTest {
     @Test
     void editAlbum_ShouldReturnEditedAlbum_WhenValidProvided(){
         //GIVEN
-        Album updatedAlbum = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        Album updatedAlbum = new Album("1", "Nina Simone", "Diamonds", "CD", "01.01.2001","");
 
         when(albumRepoInterface.save(updatedAlbum)).thenReturn(updatedAlbum);
 
@@ -135,7 +135,7 @@ class AlbumServiceTest {
     @Test
     void deleteAlbumById_shouldDeleteAlbumById(){
         //GIVEN
-        Album albumToDelete = new Album ("1", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        Album albumToDelete = new Album ("1", "Nina Simone", "Diamonds", "CD", "01.01.2001","");
         albumRepoInterface.save(albumToDelete);
 
         //WHEN

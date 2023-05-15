@@ -13,6 +13,7 @@ export default function useDetail(){
         title: "",
         format: "",
         releaseDate:"",
+        imageUrl:""
     });
     const {barcode} = useParams<{barcode: string}>();
 

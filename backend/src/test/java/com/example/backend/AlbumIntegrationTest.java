@@ -42,11 +42,11 @@ public class AlbumIntegrationTest {
     @Test
     @DirtiesContext
     void getAlbum_ShouldReturnAllRecipeAdded() throws Exception {
-        Album album = new Album("666", "Nina Simone", "Diamonds", "CD", "01.01.2001");
+        Album album = new Album("666", "Nina Simone", "Diamonds", "CD", "01.01.2001", "");
         albumRepoInterface.save(album);
-        Album album2 = new Album("333", "Tom Jones", "Not unusual", "CD", "01.01.2001");
+        Album album2 = new Album("333", "Tom Jones", "Not unusual", "CD", "01.01.2001", "");
         albumRepoInterface.save(album2);
-        Album album3 = new Album("111", "BonezMc, GZUZ", "High & Hungrig 3", "CD", "28.04.2023");
+        Album album3 = new Album("111", "BonezMc, GZUZ", "High & Hungrig 3", "CD", "28.04.2023", "");
         albumRepoInterface.save(album3);
 
         mockMvc.perform(get("/api/albums"))
@@ -59,21 +59,24 @@ public class AlbumIntegrationTest {
                                 "artist": "Nina Simone",
                                 "title": "Diamonds",
                                 "format": "CD",
-                                "releaseDate": "01.01.2001"
+                                "releaseDate": "01.01.2001",
+                                "imageUrl": ""
                                 },
                                 {
                                 "barcode": "333",
                                 "artist": "Tom Jones",
                                 "title": "Not unusual",
                                 "format": "CD",
-                                "releaseDate": "01.01.2001"
+                                "releaseDate": "01.01.2001",
+                                "imageUrl": ""
                                 },
                                 {
                                 "barcode": "111",
                                 "artist": "BonezMc, GZUZ",
                                 "title": "High & Hungrig 3",
                                 "format": "CD",
-                                "releaseDate": "28.04.2023"
+                                "releaseDate": "28.04.2023",
+                                "imageUrl": ""
                                 }
                                 ]
                                 """
@@ -90,7 +93,8 @@ public class AlbumIntegrationTest {
                                 "artist": "BonezMc, GZUZ",
                                 "title": "High & Hungrig 3",
                                 "format": "CD",
-                                "releaseDate": "28.04.2023"
+                                "releaseDate": "28.04.2023",
+                                "imageUrl": ""
                                 }
                                 """
                         ))
@@ -102,7 +106,8 @@ public class AlbumIntegrationTest {
                                 "artist": "BonezMc, GZUZ",
                                 "title": "High & Hungrig 3",
                                 "format": "CD",
-                                "releaseDate": "28.04.2023"
+                                "releaseDate": "28.04.2023",
+                                "imageUrl": ""
                                 }
                                 """
                 ));
@@ -110,7 +115,7 @@ public class AlbumIntegrationTest {
     @Test
     @DirtiesContext
     void getAlbumById_ShouldReturnAlbumWithId() throws Exception {
-        Album album = new Album("123", "BonezMc, GZUZ", "High & Hungrig 3", "CD", "28.04.2023");
+        Album album = new Album("123", "BonezMc, GZUZ", "High & Hungrig 3", "CD", "28.04.2023", "");
         albumRepoInterface.save(album);
 
         mockMvc.perform(get("/api/albums/123"))
@@ -122,7 +127,8 @@ public class AlbumIntegrationTest {
                                     "artist": "BonezMc, GZUZ",
                                     "title": "High & Hungrig 3",
                                     "format": "CD",
-                                    "releaseDate": "28.04.2023"
+                                    "releaseDate": "28.04.2023",
+                                "imageUrl": ""
                                 }
                                     """
                 ));
@@ -138,7 +144,8 @@ public class AlbumIntegrationTest {
                                     "artist": "BonezMc, GZUZ",
                                     "title": "High & Hungrig 3",
                                     "format": "CD",
-                                    "releaseDate": "28.04.2023"
+                                    "releaseDate": "28.04.2023",
+                                "imageUrl": ""
                                 }
                                 """
                         ))
@@ -150,7 +157,8 @@ public class AlbumIntegrationTest {
                                     "artist": "BonezMc, GZUZ",
                                     "title": "High & Hungrig 3",
                                     "format": "CD",
-                                    "releaseDate": "28.04.2023"
+                                    "releaseDate": "28.04.2023",
+                                "imageUrl": ""
                                 }
                                 """
                 ));
@@ -165,7 +173,8 @@ public class AlbumIntegrationTest {
                                 "barcode": "12",
                                 "title": "BadRequest-Album",
                                 "format": "id stimmt nicht mit id in url überein muss Status 400 > BadRequest kommen",
-                                "releaseDate": ""
+                                "releaseDate": "",
+                                "imageUrl": ""
                                 }
                                 """
                         ))
