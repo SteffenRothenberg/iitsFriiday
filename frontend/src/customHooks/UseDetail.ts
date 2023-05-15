@@ -59,5 +59,6 @@ export default function useDetail(){
                 toast.error("Failed to update Album");
             });
     }
+
     return {editedAlbum, album, editing, handleFormSubmit, editOnClick, albumInputChange, setEditedAlbum}
 }
