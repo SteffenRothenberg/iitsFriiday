@@ -1,4 +1,4 @@
-package security;
+package com.example.backend.security;
 
 
 import jakarta.servlet.http.HttpSession;
@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users")
 public class UserController {
 
-    @GetMapping
-    public String getTest(){
-        return"Test";
-    }
     @GetMapping("/me")
     public String getMe(){
         return SecurityContextHolder

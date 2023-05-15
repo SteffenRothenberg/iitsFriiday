@@ -1,4 +1,4 @@
-package security;
+package com.example.backend.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

@@ -29,7 +29,7 @@ function App() {
   return (
       <BrowserRouter>
           <div className="App">
-              <Header/>
+              <Header onLogout={handleLogout}/>
               <Routes><Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
 
                   <Route element={<Navigate to="/albums"/>}/>
