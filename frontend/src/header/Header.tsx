@@ -22,17 +22,35 @@ export default function Header(props: Props) {
             });
     }
 
+    function handleLogoClick() {
+        navigate("/");
+    }
+
     return (
         <AppBar position="static" sx={{ bgcolor: "#f1f1f1" }}>
             <Toolbar>
                 <Typography
                     variant="h5"
                     component="div"
-                    sx={{ flexGrow: 1, color: "#ff9900", marginLeft: "16px" }}
+                    sx={{
+                        flexGrow: 1,
+                        color: "#ff9900",
+                        marginLeft: "16px",
+                        cursor: "pointer",
+                    }}
+                    onClick={handleLogoClick}
                 >
                     iitsFriiday
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary" sx={{flexGrow: 1,  marginCenter: "16px", color: "#ff9900"}}>
+                <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    sx={{
+                        flexGrow: 1,
+                        marginCenter: "16px",
+                        color: "#ff9900",
+                    }}
+                >
                     manage your Release
                 </Typography>
                 <div className="navbar">
