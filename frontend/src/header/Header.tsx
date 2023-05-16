@@ -18,6 +18,9 @@ export default function Header(props: Props){
             .then(() => {
                 navigate("/login");
             })
+            .catch((error) => {
+                console.error("Error occurred:", error)
+            });
     }
 
     return(

@@ -24,7 +24,7 @@ export const LoginPage = (props: Props) => {
         event.preventDefault();
 
         props.onLogin(username, password).then(() => {
-            navigate("/games");
+            navigate("/albums");
         })
             .catch((error) => {
                 console.error("Error occurred:", error)
