@@ -90,7 +90,7 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                             </CardContent>
                             <Grid container spacing={2} justifyContent="space-evenly" mt={2}>
                                 <CardActions>
-                                    <Button onClick={editOnClick} variant="contained" color="primary">
+                                    <Button onClick={editOnClick} variant="contained" color="warning">
                                         Release bearbeiten
                                     </Button>
                                     <Button onClick={onDeleteClick} variant="contained" color="error">
