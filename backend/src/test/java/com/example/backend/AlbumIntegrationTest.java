@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -84,6 +86,7 @@ public class AlbumIntegrationTest {
     }
     @Test
     @DirtiesContext
+    @WithMockUser
     void addAlbum_shouldReturnAddedAlbum() throws Exception {
         mockMvc.perform(post("/api/albums")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -97,7 +100,8 @@ public class AlbumIntegrationTest {
                                 "imageUrl": ""
                                 }
                                 """
-                        ))
+                        )
+                        .with(csrf()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
@@ -135,6 +139,7 @@ public class AlbumIntegrationTest {
     }
     @Test
     @DirtiesContext
+    @WithMockUser
     void editAlbum_ById_shouldReturnEditedAlbum() throws Exception {
         mockMvc.perform(put("/api/albums/123/update")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -148,7 +153,9 @@ public class AlbumIntegrationTest {
                                 "imageUrl": ""
                                 }
                                 """
-                        ))
+                        )
+                        .with(csrf())
+                )
                 .andExpect(status().isOk())
                 .andExpect(content().json(
                         """
@@ -165,6 +172,7 @@ public class AlbumIntegrationTest {
     }
     @Test
     @DirtiesContext
+    @WithMockUser
     void editAlbum_ById_shouldReturnBadRequest() throws Exception {
         mockMvc.perform(put("/api/albums/1234/update")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -177,11 +185,14 @@ public class AlbumIntegrationTest {
                                 "imageUrl": ""
                                 }
                                 """
-                        ))
+                        )
+                        .with(csrf())
+                )
                 .andExpect(status().isBadRequest());
     }
     @DirtiesContext
     @Test
+    @WithMockUser
     void deleteAlbum_expectSuccessfulDelete() throws Exception {
         String saveResult = mockMvc.perform(
                         post("http://localhost:8080/api/albums")
@@ -189,7 +200,7 @@ public class AlbumIntegrationTest {
                                 .content("""
                                         {"description":"Nächsten Endpunkt implementieren","status":"OPEN"}
                                         """)
-
+                                .with(csrf())
                 )
                 .andReturn()
                 .getResponse()
@@ -199,6 +210,7 @@ public class AlbumIntegrationTest {
         String barcode = saveResultAlbum.barcode();
 
         mockMvc.perform(delete("http://localhost:8080/api/albums/" + barcode)
+                        .with(csrf())
                 )
                 .andExpect(status().isOk());
 
@@ -208,5 +220,4 @@ public class AlbumIntegrationTest {
                         []
                         """));
     }
-
 }

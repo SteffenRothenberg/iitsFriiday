@@ -33,6 +33,7 @@ export default function useAlbums(){
             })
             .catch(console.error)
     }
+
     //const filteredAlbums = albums.filter((recipe) => recipe.artist.toLowerCase().includes(searchTerm.toLowerCase()));
     return {albums, addAlbum, deleteAlbum, searchTerm, setSearchTerm}
 }
