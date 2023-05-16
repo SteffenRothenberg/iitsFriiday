@@ -8,8 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.Collections;
 import java.util.Optional;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class MongoUserDetailsServiceTest {
@@ -21,12 +21,12 @@ public class MongoUserDetailsServiceTest {
     private MongoUserDetailsService userDetailsService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testLoadUserByUsername_ExistingUser() {
+    void testLoadUserByUsername_ExistingUser() {
         // GIVEN
         String username = "username";
         MongoUser mongoUser = new MongoUser("123", "username", "password");
@@ -42,14 +42,21 @@ public class MongoUserDetailsServiceTest {
     }
 
     @Test
-    public void testLoadUserByUsername_NonExistingUser() {
+    void testLoadUserByUsername_NonExistingUser() {
         // GIVEN
         String username = "non_existing_user";
         when(mongoUserRepository.findMongoUserByUsername(username)).thenReturn(Optional.empty());
 
-        // WHEN & THEN
-        assertThrows(UsernameNotFoundException.class, () -> {
+        // WHEN
+        Throwable exception = null;
+        try {
             userDetailsService.loadUserByUsername(username);
-        });
+        } catch (Throwable ex) {
+            exception = ex;
+        }
+
+        // THEN
+        assertNotNull(exception);
+        assertTrue(exception instanceof UsernameNotFoundException);
     }
 }
