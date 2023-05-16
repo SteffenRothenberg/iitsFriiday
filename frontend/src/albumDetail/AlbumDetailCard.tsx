@@ -65,11 +65,7 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                         <br/>
                         <p>Title :{album.title}</p>
                         <br/>
-                        <p>Format :{album.format}</p>
-                        <br/>
-                        <p>Release-Date :{album.releaseDate}</p>
-                        <br/>
-                        <img src={album.imageUrl} alt="No Picture!" width="150" height="150"></img>
+                        <img src={album.imageUrl} alt="Album-Cover" width="150" height="150"></img>
                         <br/>
                         <button onClick={editOnClick}>Release Bearbeiten</button>
                         <button onClick={onDeleteClick}>Release löschen</button>
