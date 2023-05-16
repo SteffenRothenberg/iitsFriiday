@@ -1,13 +1,5 @@
 /*
-.album-gallery {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-}
-.actionbar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+.style {
+    border: green solid 1px;
 }
 */

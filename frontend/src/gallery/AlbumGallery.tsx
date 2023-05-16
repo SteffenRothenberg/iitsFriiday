@@ -2,7 +2,8 @@ import { Album } from "../model/Album";
 import { useState } from "react";
 import useAlbums from "../customHooks/UseAlbums";
 import AlbumCard from "../card/AlbumCard";
-import { TextField, Grid, MenuItem } from "@mui/material";
+import { TextField, MenuItem } from "@mui/material";
+import "./AlbumGallery.css";
 
 type AlbumGalleryProps = {
     albums: Album[];
@@ -48,13 +49,11 @@ export default function AlbumGallery(props: AlbumGalleryProps) {
                     <MenuItem value={SearchOption.Artist}>Artist</MenuItem>
                 </TextField>
             </div>
-            <Grid container spacing={2}>
+            <div className="style" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", height: "100%" }}>
                 {filteredAlbums.map((card: Album) => (
-                    <Grid item key={card.barcode} xs={4}>
                         <AlbumCard album={card} />
-                    </Grid>
                 ))}
-            </Grid>
+            </div>
         </div>
     );
 }
