@@ -32,7 +32,7 @@ export default function Header(props: Props) {
                 >
                     iitsFriiday
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary" sx={{ marginLeft: "16px" }}>
+                <Typography variant="subtitle1" color="textSecondary" sx={{flexGrow: 1,  marginCenter: "16px", color: "#ff9900"}}>
                     manage your Release
                 </Typography>
                 <div className="navbar">
@@ -42,7 +42,7 @@ export default function Header(props: Props) {
                         color="inherit"
                         sx={{ "&:hover": { backgroundColor: "#ff9900" } }}
                     >
-                        Click here for upcoming Releases
+                        Click here for our Releases
                     </Button>
                     <Button
                         component={NavLink}
@@ -50,7 +50,7 @@ export default function Header(props: Props) {
                         color="inherit"
                         sx={{ "&:hover": { backgroundColor: "#ff9900" } }}
                     >
-                        create album
+                        create Album
                     </Button>
                     <Button
                         color="inherit"

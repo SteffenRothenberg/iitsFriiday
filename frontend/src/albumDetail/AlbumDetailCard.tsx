@@ -1,6 +1,16 @@
 import useDetail from "../customHooks/UseDetail";
-import { useNavigate } from "react-router-dom";
-import { Button, Typography, Card, CardHeader, CardContent, CardActions, TextField } from "@mui/material";
+import {useNavigate} from "react-router-dom";
+import {
+    Button,
+    Typography,
+    Card,
+    CardHeader,
+    CardContent,
+    CardActions,
+    TextField,
+    Grid,
+    Container
+} from "@mui/material";
 import './AlbumDetailCard.css'
 
 type AlbumDetailProps = {
@@ -8,7 +18,7 @@ type AlbumDetailProps = {
 };
 
 export default function AlbumDetailCard(props: AlbumDetailProps) {
-    const { editedAlbum, album, editing, handleFormSubmit, editOnClick, albumInputChange } = useDetail();
+    const {editedAlbum, album, editing, handleFormSubmit, editOnClick, albumInputChange} = useDetail();
     const navigate = useNavigate();
 
     function onDeleteClick() {
@@ -23,7 +33,7 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
             {album ? (
                 editing ? (
                     <form onSubmit={handleFormSubmit}>
-                        <CardHeader title="Release bearbeiten" />
+                        <CardHeader title="Release bearbeiten"/>
                         <CardContent>
                             <TextField
                                 label="Artist"
@@ -62,29 +72,33 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                             />
                         </CardContent>
                         <CardActions>
-                            <Button type="submit" variant="contained" color="warning">
+                            <Button onClick={onDeleteClick} variant="contained" color="warning">
                                 Speichern
                             </Button>
                         </CardActions>
                     </form>
                 ) : (
                     <div>
-                        <CardHeader title="Alle Infos zu diesem Release:" />
-                        <CardContent>
-                            <Typography variant="body1">Artist: {album.artist}</Typography>
-                            <Typography variant="body1">Title: {album.title}</Typography>
-                            <Typography variant="body1">Format: {album.format}</Typography>
-                            <Typography variant="body1">Release-Date: {album.releaseDate}</Typography>
-                            <img src={album.imageUrl} alt="Album-Cover" width="150" height="150" />
-                        </CardContent>
-                        <CardActions>
-                            <Button onClick={editOnClick} variant="contained" color="primary">
-                                Release bearbeiten
-                            </Button>
-                            <Button onClick={onDeleteClick} variant="contained" color="error">
-                                Release löschen
-                            </Button>
-                        </CardActions>
+                        <Container maxWidth="sm">
+                            <CardHeader title="Alle Infos zu diesem Release:"/>
+                            <CardContent>
+                                <Typography variant="body1">Artist: {album.artist}</Typography>
+                                <Typography variant="body1">Title: {album.title}</Typography>
+                                <Typography variant="body1">Format: {album.format}</Typography>
+                                <Typography variant="body1">Release-Date: {album.releaseDate}</Typography>
+                                <img src={album.imageUrl} alt="Album-Cover" width="150" height="150"/>
+                            </CardContent>
+                            <Grid container spacing={2} justifyContent="space-evenly" mt={2}>
+                                <CardActions>
+                                    <Button onClick={editOnClick} variant="contained" color="primary">
+                                        Release bearbeiten
+                                    </Button>
+                                    <Button onClick={onDeleteClick} variant="contained" color="error">
+                                        Release löschen
+                                    </Button>
+                                </CardActions>
+                            </Grid>
+                        </Container>
                     </div>
                 )
             ) : (

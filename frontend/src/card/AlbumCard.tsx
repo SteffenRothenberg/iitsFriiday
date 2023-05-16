@@ -1,6 +1,6 @@
 import { Album } from "../model/Album";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, Typography, Button, CardMedia, Grid } from "@mui/material";
+import {Card, CardContent, Typography, Button, CardMedia, Grid, Container} from "@mui/material";
 import './AlbumCard.css';
 
 type AlbumProps = {
@@ -11,23 +11,21 @@ export default function AlbumCard(props: AlbumProps) {
     const navigate = useNavigate();
 
     return (
-        <Grid item xs={12} sm={6} md={4} lg={3}>
+            <Grid minWidth={0}>
             <Card className="album-card">
-                <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+                <CardContent sx={{ display: "flex", alignItems: "center", maxWidth: "sm" }}>
                     <CardMedia
                         component="img"
                         src={props.album.imageUrl}
                         alt="Album-Card"
                         sx={{
-                            maxHeight: "150px",
-                            maxWidth: "150px",
-                            width: "auto",
-                            height: "auto",
-                            objectFit: "cover",
+                            minHeight:"10rem",
+                            minWidth:"10rem",
+                            maxHeight:"15%",
+                            maxWidth:"15%",
                             marginRight: "1rem",
-                        }}
-                    />
-                    <div>
+                        }}/>
+                    <Container>
                         <Typography variant="body1" component="p">
                             Artist:
                         </Typography>
@@ -48,9 +46,8 @@ export default function AlbumCard(props: AlbumProps) {
                         >
                             Album-Details
                         </Button>
-                    </div>
+                        </Container>
                 </CardContent>
-
             </Card>
         </Grid>
     );
