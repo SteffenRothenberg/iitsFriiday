@@ -25,7 +25,10 @@ export const LoginPage = (props: Props) => {
 
         props.onLogin(username, password).then(() => {
             navigate("/games");
-        });
+        })
+            .catch((error) => {
+                console.error("Error occurred:", error)
+            });
     }
 
     return (
