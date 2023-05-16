@@ -12,7 +12,7 @@ import useUser from "./useUser";
 
 function App() {
     const {albums, addAlbum, deleteAlbum} = useAlbums()
-    const { user, login, logout, isLoading} = useUser();
+    const {login, logout} = useUser();
 
     function handleLogout() {
         return new Promise<void>((resolve) => {
