@@ -1,14 +1,13 @@
-import {Link, NavLink, useNavigate} from "react-router-dom";
-import './Header.css'
-import {Button} from "@mui/material";
-import {useState} from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Button, Typography, AppBar, Toolbar } from "@mui/material";
+import { useState } from "react";
 
 type Props = {
     onLogout: () => Promise<void>;
 };
 
-export default function Header(props: Props){
-    const [,setIsLoading] = useState(false)
+export default function Header(props: Props) {
+    const [, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     function handleLogout() {
@@ -19,19 +18,49 @@ export default function Header(props: Props){
                 navigate("/login");
             })
             .catch((error) => {
-                console.error("Error occurred:", error)
+                console.error("Error occurred:", error);
             });
     }
 
-    return(
-        <div className="header">
-            <h1>iitsFriiday</h1>
-            <h2>where creativity is born</h2>
-            <div className="navbar">
-                <section className="navElement"><Link to="/albums">Click here for upcoming Releases &larr;</Link></section>
-                <section className="navElement"><NavLink to="/albums/add">&rarr;create album </NavLink></section>
-                <Button onClick={handleLogout}>LogOut</Button>
-        </div>
-        </div>
-    )
+    return (
+        <AppBar position="static" sx={{ bgcolor: "#f1f1f1" }}>
+            <Toolbar>
+                <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{ flexGrow: 1, color: "#ff9900", marginLeft: "16px" }}
+                >
+                    iitsFriiday
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary" sx={{ marginLeft: "16px" }}>
+                    manage your Release
+                </Typography>
+                <div className="navbar">
+                    <Button
+                        component={Link}
+                        to="/albums"
+                        color="inherit"
+                        sx={{ "&:hover": { backgroundColor: "#ff9900" } }}
+                    >
+                        Click here for upcoming Releases
+                    </Button>
+                    <Button
+                        component={NavLink}
+                        to="/albums/add"
+                        color="inherit"
+                        sx={{ "&:hover": { backgroundColor: "#ff9900" } }}
+                    >
+                        create album
+                    </Button>
+                    <Button
+                        color="inherit"
+                        onClick={handleLogout}
+                        sx={{ "&:hover": { backgroundColor: "#ff9900" } }}
+                    >
+                        LogOut
+                    </Button>
+                </div>
+            </Toolbar>
+        </AppBar>
+    );
 }
