@@ -33,7 +33,7 @@ export default function AlbumGallery(props: AlbumGalleryProps) {
 
     return (
         <div className="album-gallery">
-            <div className="actionbar">
+            <div className="action-bar">
                 <TextField
                     type="text"
                     placeholder="Search for..."
@@ -49,7 +49,7 @@ export default function AlbumGallery(props: AlbumGalleryProps) {
                     <MenuItem value={SearchOption.Artist}>Artist</MenuItem>
                 </TextField>
             </div>
-            <div className="style" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", height: "100%" }}>
+            <div className="style">
                 {filteredAlbums.map((card: Album) => (
                         <AlbumCard album={card} />
                 ))}

@@ -1,6 +1,6 @@
-/*
 .album-card{
-    border: 1px black solid;
-    width: 250px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
-*/
