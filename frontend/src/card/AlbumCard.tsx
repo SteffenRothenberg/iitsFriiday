@@ -11,7 +11,6 @@ export default function AlbumCard(props: AlbumProps) {
     const navigate = useNavigate();
 
     return (
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap"}}>
             <Card className="album-card">
                 <CardContent sx={{ display: "flex", alignItems: "center", maxWidth: "sm", maxHeight:"sm" }}>
                     <CardMedia
@@ -49,6 +48,5 @@ export default function AlbumCard(props: AlbumProps) {
                     </CardContent>
                 </CardContent>
             </Card>
-        </div>
     );
 }
