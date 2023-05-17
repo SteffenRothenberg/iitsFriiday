@@ -15,7 +15,7 @@ import {SignUpPage} from "./SignUpPage";
 
 function App() {
     const {albums, addAlbum, deleteAlbum, loadAllAlbums} = useAlbums()
-    const {user, login, logout, isLoading,createUser} = useUser();
+    const {user, login, logout, isLoading, createUser} = useUser();
 
     useEffect(() => {
         if (user) {
@@ -36,26 +36,28 @@ function App() {
             console.error('An error occurred during login:', error);
         });
     }
-  return (
-      <BrowserRouter>
-          <div className="App">
-              <Header onLogout={handleLogout}/>
-              <Routes>
-                  <Route path="/signup" element={<SignUpPage createUser={createUser}/>}/>
-                  <Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
-                  <Route path="/" element={<HomePage />} />
-                  <Route element={<ProtectedRoutes user={user} isLoading={isLoading}/> }>
-                  <Route element={<Navigate to="/albums"/>}/>
-                  <Route path="/albums"
-                         element={<AlbumGallery albums={albums}/>}/>
-                  <Route path="/albums/add"
-                         element={<AddAlbum addAlbum={addAlbum}/>}/>
-                  <Route path="/albums/:barcode"
-                         element={<AlbumDetailCard deleteAlbum={deleteAlbum}/>}/>
-              </Route>
-              </Routes>
-          </div>
-      </BrowserRouter>
-  );
+
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Header onLogout={handleLogout}/>
+                <Routes>
+                    <Route path="/signup" element={<SignUpPage createUser={createUser}/>}/>
+                    <Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route element={<ProtectedRoutes user={user} isLoading={isLoading}/>}>
+                        <Route element={<Navigate to="/albums"/>}/>
+                        <Route path="/albums"
+                               element={<AlbumGallery albums={albums}/>}/>
+                        <Route path="/albums/add"
+                               element={<AddAlbum addAlbum={addAlbum}/>}/>
+                        <Route path="/albums/:barcode"
+                               element={<AlbumDetailCard deleteAlbum={deleteAlbum}/>}/>
+                    </Route>
+                </Routes>
+            </div>
+        </BrowserRouter>
+    );
 }
+
 export default App;

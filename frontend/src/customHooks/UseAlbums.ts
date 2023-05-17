@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {Album, NewAlbum} from "../model/Album";
 import {toast} from "react-toastify";
 
-export default function useAlbums(){
+export default function useAlbums() {
     const [albums, setAlbums] = useState<Album[]>([])
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -11,7 +11,7 @@ export default function useAlbums(){
         loadAllAlbums()
     }, [])
 
-    function loadAllAlbums(){
+    function loadAllAlbums() {
         axios.get("/api/albums")
             .then((getAllAlbums) => {
                 setAlbums(getAllAlbums.data)
@@ -20,12 +20,14 @@ export default function useAlbums(){
                 console.error(error)
             })
     }
-    function addAlbum(newAlbum: NewAlbum){
+
+    function addAlbum(newAlbum: NewAlbum) {
         axios.post("/api/albums", newAlbum)
             .then(() => loadAllAlbums())
-                .catch(() => console.error("post on /api/albums not successful"))
+            .catch(() => console.error("post on /api/albums not successful"))
     }
-    function deleteAlbum(id : string) {
+
+    function deleteAlbum(id: string) {
         axios.delete('/api/albums/' + id)
             .then(() => {
                 setAlbums(albums.filter((album) => album.barcode !== id))
@@ -35,5 +37,5 @@ export default function useAlbums(){
     }
 
     //const filteredAlbums = albums.filter((recipe) => recipe.artist.toLowerCase().includes(searchTerm.toLowerCase()));
-    return {albums,loadAllAlbums, addAlbum, deleteAlbum, searchTerm, setSearchTerm}
+    return {albums, loadAllAlbums, addAlbum, deleteAlbum, searchTerm, setSearchTerm}
 }

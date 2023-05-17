@@ -1,8 +1,8 @@
-import { NewAlbum } from "../model/Album";
-import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {NewAlbum} from "../model/Album";
+import {FormEvent, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import './AddAlbum.css'
-import { Button, TextField } from "@mui/material";
+import {Button, TextField} from "@mui/material";
 
 type AddAlbumProps = {
     addAlbum: (newAlbum: NewAlbum) => void
@@ -18,7 +18,13 @@ export default function AddAlbum(props: AddAlbumProps) {
 
     function onSaveAlbum(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        const newAlbum: NewAlbum = { artist: artist, title: title, format: format, releaseDate: releaseDate, imageUrl: imageUrl }
+        const newAlbum: NewAlbum = {
+            artist: artist,
+            title: title,
+            format: format,
+            releaseDate: releaseDate,
+            imageUrl: imageUrl
+        }
         props.addAlbum(newAlbum)
         navigate("/albums")
     }
@@ -135,7 +141,7 @@ export default function AddAlbum(props: AddAlbumProps) {
                     id="csv-upload"
                     type="file"
                     accept=".csv"
-                    style={{ display: 'none' }}
+                    style={{display: 'none'}}
                     onChange={onImportCSV}
                 />
             </form>
