@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import {UserModel} from "./model/User";
 
 //eslint-disable-next-line
 export default function useUser() {
@@ -49,5 +50,18 @@ export default function useUser() {
                 console.log("error")
             });
     }
-    return { user, login, logout, isLoading};
+
+    const createUser = async (newUser: UserModel) => {
+        return await axios.post("/api/users/signup", newUser, {
+            withCredentials: true
+        }).then((response) => {
+            setUser(response.data)
+            return true;
+        }).catch((error) => {
+            console.error(error);
+            return false;
+        })
+    }
+
+    return { user, login, logout, isLoading, createUser};
 }

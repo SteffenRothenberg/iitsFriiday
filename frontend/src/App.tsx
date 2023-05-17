@@ -10,11 +10,12 @@ import {LoginPage} from "./LoginPage";
 import useUser from "./useUser";
 import HomePage from "./HomePage";
 import ProtectedRoutes from "./ProtectedRoutes";
+import {SignUpPage} from "./SignUpPage";
 
 
 function App() {
     const {albums, addAlbum, deleteAlbum, loadAllAlbums} = useAlbums()
-    const {user, login, logout, isLoading} = useUser();
+    const {user, login, logout, isLoading,createUser} = useUser();
 
     useEffect(() => {
         if (user) {
@@ -40,6 +41,7 @@ function App() {
           <div className="App">
               <Header onLogout={handleLogout}/>
               <Routes>
+                  <Route path="/signup" element={<SignUpPage createUser={createUser}/>}/>
                   <Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
                   <Route path="/" element={<HomePage />} />
                   <Route element={<ProtectedRoutes user={user} isLoading={isLoading}/> }>
