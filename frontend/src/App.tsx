@@ -8,6 +8,7 @@ import AddAlbum from "./addProduct/AddAlbum";
 import AlbumDetailCard from "./albumDetail/AlbumDetailCard";
 import {LoginPage} from "./LoginPage";
 import useUser from "./useUser";
+import HomePage from "./HomePage";
 
 
 function App() {
@@ -30,8 +31,9 @@ function App() {
       <BrowserRouter>
           <div className="App">
               <Header onLogout={handleLogout}/>
-              <Routes><Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
-
+              <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
                   <Route element={<Navigate to="/albums"/>}/>
                   <Route path="/albums"
                          element={<AlbumGallery albums={albums}/>}/>

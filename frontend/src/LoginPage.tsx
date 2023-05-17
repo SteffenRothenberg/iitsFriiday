@@ -37,8 +37,8 @@ export const LoginPage = (props: Props) => {
                        label="Username (enter test as dummy user)"
                        variant="filled"
                        value={username}
-                       InputProps={{sx: {color: "deepskyblue", fontWeight: "bold"}}}
-                       InputLabelProps={{sx: {color: "Snow"}}}
+                       InputProps={{sx: {color: "white", fontWeight: "bold"}}}
+                       InputLabelProps={{sx: {color: "orange"}}}
                        onChange={(event) => setUsername(event.target.value)}
             />
 
@@ -47,24 +47,26 @@ export const LoginPage = (props: Props) => {
                 variant="filled"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                InputProps={{sx: {color: "deepskyblue", fontWeight: "bold"}, type: "password"}}
-                InputLabelProps={{sx: {color: "Snow"}}}
+                InputProps={{sx: {color: "white", fontWeight: "bold"}, type: "password"}}
+                InputLabelProps={{sx: {color: "orange"}}}
             />
 
-            <Button variant="contained"
-                    type="submit"
-                    sx={{
-                        bgcolor: "black",
-                        color: "green",
-                        fontWeight: "bold",
-                        minWidth: "100px",
-                        maxWidth: "200px",
-                        mx: "auto",
-                        "&:hover": {
-                            color: "black",
-                            bgcolor: "deepskyblue"
-                        },
-                    }}>
+            <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                    bgcolor: "white",
+                    color: "orange",
+                    fontWeight: "bold",
+                    minWidth: "100px",
+                    maxWidth: "200px",
+                    mx: "auto",
+                    "&:hover": {
+                        color: "black",
+                        bgcolor: "orange"
+                    },
+                }}
+            >
                 Login
             </Button>
         </FormContainer>

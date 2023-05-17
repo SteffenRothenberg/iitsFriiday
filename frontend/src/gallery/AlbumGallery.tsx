@@ -1,31 +1,59 @@
-import {Album} from "../model/Album";
-import {useState} from "react";
+import { Album } from "../model/Album";
+import { useState } from "react";
 import useAlbums from "../customHooks/UseAlbums";
 import AlbumCard from "../card/AlbumCard";
-import './AlbumGallery.css'
+import { TextField, MenuItem } from "@mui/material";
+import "./AlbumGallery.css";
 
 type AlbumGalleryProps = {
-    albums: Album[],
+    albums: Album[];
+};
+
+enum SearchOption {
+    Title = "title",
+    Artist = "artist",
 }
-export default function AlbumGallery(props: AlbumGalleryProps){
+
+export default function AlbumGallery(props: AlbumGalleryProps) {
     const [searchTerm, setSearchTerm] = useState("");
-    const {albums} = useAlbums()
+    const [searchOption, setSearchOption] = useState(SearchOption.Title);
+    const { albums } = useAlbums();
+
+    const handleSearchTermChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSearchOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchOption(event.target.value as SearchOption);
+    };
+
     const filteredAlbums = albums.filter((album) =>
-        album.title.toLowerCase().includes(searchTerm.toLowerCase())
+        album[searchOption].toLowerCase().includes(searchTerm.toLowerCase())
     );
+
     return (
         <div className="album-gallery">
             <div className="actionbar">
-                <input
+                <TextField
                     type="text"
-                    placeholder="AlbumTitel..."
+                    placeholder="Search for..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleSearchTermChange}
                 />
+                <TextField
+                    select
+                    value={searchOption}
+                    onChange={handleSearchOptionChange}
+                >
+                    <MenuItem value={SearchOption.Title}>Title</MenuItem>
+                    <MenuItem value={SearchOption.Artist}>Artist</MenuItem>
+                </TextField>
             </div>
-            {filteredAlbums.map((card : Album) => (
-                <AlbumCard key={card.barcode} album={card} />
-            ))}
+            <div className="style" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", height: "100%" }}>
+                {filteredAlbums.map((card: Album) => (
+                        <AlbumCard album={card} />
+                ))}
+            </div>
         </div>
-    )
+    );
 }

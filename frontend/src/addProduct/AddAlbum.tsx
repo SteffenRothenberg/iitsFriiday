@@ -2,6 +2,7 @@ import {NewAlbum} from "../model/Album";
 import {FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import './AddAlbum.css'
+import {Button, TextField} from "@mui/material";
 
 type AddAlbumProps = {
     addAlbum: (newAlbum: NewAlbum) => void
@@ -28,41 +29,58 @@ export default function AddAlbum(props: AddAlbumProps){
     return (
         <div>
             <form onSubmit={onSaveAlbum}>
-                <p>Artist:</p>
-                <input type="text"
-                       value={artist}
-                       onChange={(event) => {
-                           setArtist(event.target.value)
-                       }}/>
-                <p>Title:</p>
-                <textarea
+                <TextField
+                    label="Artist"
+                    value={artist}
+                    onChange={(event) => {
+                        setArtist(event.target.value);
+                    }}
+                    fullWidth
+                />
+                <TextField
+                    label="Title"
                     value={title}
                     onChange={(event) => {
-                        setTitle(event.target.value)
-                    }}/>
-                <br/>
-                <p>Format:</p>
-                <textarea
+                        setTitle(event.target.value);
+                    }}
+                    fullWidth
+                    multiline
+                    rows={4}
+                />
+                <TextField
+                    label="Format"
                     value={format}
                     onChange={(event) => {
-                        setFormat(event.target.value)
-                    }}/>
-                <br/>
-                <p>ReleaseDate:</p>
-                <textarea
+                        setFormat(event.target.value);
+                    }}
+                    fullWidth
+                    multiline
+                    rows={4}
+                />
+                <TextField
+                    label="Release Date"
                     value={releaseDate}
                     onChange={(event) => {
-                        setReleaseDate(event.target.value)
-                    }}/>
-                <br/>
-                <p>Image-URL:</p>
-                <textarea
+                        setReleaseDate(event.target.value);
+                    }}
+                    fullWidth
+                    multiline
+                    rows={4}
+                />
+                <TextField
+                    label="Image URL"
                     value={imageUrl}
                     onChange={(event) => {
-                        setImageUrl(event.target.value)
-                    }}/>
-                <button>Album speichern</button>
+                        setImageUrl(event.target.value);
+                    }}
+                    fullWidth
+                    multiline
+                    rows={4}
+                />
+                <Button type="submit" variant="contained" color="warning">
+                    Speichern
+                </Button>
             </form>
         </div>
-    )
+    );
 }
