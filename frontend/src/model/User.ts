@@ -3,3 +3,7 @@ export type User = {
     username: string,
     password: string
 }
+export type UserModel = {
+    username: string,
+    password: string
+}

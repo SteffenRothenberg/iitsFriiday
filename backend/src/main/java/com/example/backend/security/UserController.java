@@ -1,14 +1,20 @@
 package com.example.backend.security;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/users")
 public class UserController {
+
+    private final MongoUserRepository mongoUserRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
     @GetMapping("/me")
     public String getMe(){
@@ -29,5 +35,15 @@ public class UserController {
         httpSession.invalidate();
         SecurityContextHolder
                 .clearContext();
+    }
+    @PostMapping("/signup")
+    public MongoUser signUp(@RequestBody @Valid MongoUser user) {
+        if (mongoUserRepository.findMongoUserByUsername(user.username()).isPresent()) {
+            String errorMessage = "Username already exists!";
+            throw new IllegalArgumentException(errorMessage);
+        }
+        String encodedPassword = passwordEncoder.encode(user.password());
+        MongoUser newUser = new MongoUser(null, user.username(), encodedPassword);
+        return mongoUserRepository.save(newUser);
     }
 }
