@@ -24,7 +24,7 @@ export default function AlbumCard(props: AlbumProps) {
                             maxWidth:"15%",
                             marginRight: "1rem",
                         }}/>
-                    <CardContent sx={{ flex: 1 }}>
+                    <CardContent>
                         <Typography variant="body1" component="p">
                             Artist:
                         </Typography>

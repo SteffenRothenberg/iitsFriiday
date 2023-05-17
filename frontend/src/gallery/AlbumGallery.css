@@ -5,8 +5,8 @@
     height: 100%;
     row-gap: 15px;
     column-gap: 15px;
+    text-align: center;
 }
 .action-bar {
-    display: flex;
-    align-content: center;
+    text-align: center;
 }
