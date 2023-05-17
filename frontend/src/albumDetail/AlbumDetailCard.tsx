@@ -72,7 +72,7 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                             />
                         </CardContent>
                         <CardActions>
-                            <Button onClick={onDeleteClick} variant="contained" color="warning">
+                            <Button type="submit" variant="contained" color="warning">
                                 Speichern
                             </Button>
                         </CardActions>
