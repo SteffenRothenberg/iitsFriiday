@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import './App.css';
 import useAlbums from "./customHooks/UseAlbums";
@@ -9,11 +9,19 @@ import AlbumDetailCard from "./albumDetail/AlbumDetailCard";
 import {LoginPage} from "./LoginPage";
 import useUser from "./useUser";
 import HomePage from "./HomePage";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 
 function App() {
-    const {albums, addAlbum, deleteAlbum} = useAlbums()
-    const {login, logout} = useUser();
+    const {albums, addAlbum, deleteAlbum, loadAllAlbums} = useAlbums()
+    const {user, login, logout, isLoading} = useUser();
+
+    useEffect(() => {
+        if (user) {
+            loadAllAlbums();
+        }
+        //eslint-disable-next-line
+    }, []);
 
     function handleLogout() {
         return new Promise<void>((resolve) => {
@@ -32,8 +40,9 @@ function App() {
           <div className="App">
               <Header onLogout={handleLogout}/>
               <Routes>
-                  <Route path="/" element={<HomePage />} />
                   <Route path="/login" element={<LoginPage onLogin={handleLogin}/>}/>
+                  <Route path="/" element={<HomePage />} />
+                  <Route element={<ProtectedRoutes user={user} isLoading={isLoading}/> }>
                   <Route element={<Navigate to="/albums"/>}/>
                   <Route path="/albums"
                          element={<AlbumGallery albums={albums}/>}/>
@@ -41,6 +50,7 @@ function App() {
                          element={<AddAlbum addAlbum={addAlbum}/>}/>
                   <Route path="/albums/:barcode"
                          element={<AlbumDetailCard deleteAlbum={deleteAlbum}/>}/>
+              </Route>
               </Routes>
           </div>
       </BrowserRouter>

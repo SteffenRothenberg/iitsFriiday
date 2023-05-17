@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 
 type Props = {
     user?: string;
@@ -8,8 +9,15 @@ type Props = {
 export default function ProtectedRoutes({ user, isLoading }: Props) {
     if (isLoading) {
         return (
-            <div>
-                <p>Loading ...</p>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                }}
+            >
+                <CircularProgress />
             </div>
         );
     }

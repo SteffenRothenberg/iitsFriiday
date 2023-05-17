@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/users").authenticated()
                 .requestMatchers("/api/users/login").permitAll()
                 .requestMatchers("/api/albums").permitAll()
+                .requestMatchers("/api/albums/add").permitAll()
                 .anyRequest().permitAll()
                 .and().build();
     }
