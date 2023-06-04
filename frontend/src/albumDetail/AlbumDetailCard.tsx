@@ -34,7 +34,7 @@ export default function AlbumDetailCard(props: AlbumDetailProps) {
                 editing ? (
                     <form onSubmit={handleFormSubmit}>
                         <CardHeader title="Release bearbeiten"/>
-                        <CardContent>
+                        <CardContent className="enterTextfield">
                             <TextField
                                 label="Artist"
                                 name="artist"

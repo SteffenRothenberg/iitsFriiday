@@ -6,11 +6,11 @@ import Header from "./header/Header";
 import AlbumGallery from "./gallery/AlbumGallery";
 import AddAlbum from "./addProduct/AddAlbum";
 import AlbumDetailCard from "./albumDetail/AlbumDetailCard";
-import {LoginPage} from "./LoginPage";
-import useUser from "./useUser";
+import {LoginPage} from "./routesAndLogIns/LoginPage";
+import useUser from "./customHooks/useUser";
 import HomePage from "./HomePage";
-import ProtectedRoutes from "./ProtectedRoutes";
-import {SignUpPage} from "./SignUpPage";
+import ProtectedRoutes from "./routesAndLogIns/ProtectedRoutes";
+import {SignUpPage} from "./routesAndLogIns/SignUpPage";
 
 
 function App() {

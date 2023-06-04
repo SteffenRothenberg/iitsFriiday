@@ -2,7 +2,7 @@ import {Button, TextField} from "@mui/material";
 import React, {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {styled} from "@mui/material/styles";
-import {UserModel} from "./model/User";
+import {UserModel} from "../model/User";
 
 type createUserProps = {
     createUser: (user: UserModel) => Promise<boolean>;
